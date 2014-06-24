@@ -20,6 +20,7 @@ namespace KP_Monitor
             this.post.Visibility = Visibility.Collapsed;
             this.rule.Visibility = Visibility.Collapsed;
             this.reward.Visibility = Visibility.Collapsed;
+            this.profilePicture.Visibility = Visibility.Collapsed;
             this.LayoutRoot.Background = new SolidColorBrush(Colors.Blue);
             isi.Foreground = new SolidColorBrush(Colors.White);
             this.profilePicture.Visibility = Visibility.Collapsed;
@@ -46,6 +47,7 @@ namespace KP_Monitor
             this.loginButton.Visibility = Visibility.Visible;
             ApplicationBar.IsVisible = false;
             this.profilePicture.Visibility = Visibility.Collapsed;
+
         }
 
         private void OnSessionStateChanged(object sender, Facebook.Client.Controls.SessionStateChangedEventArgs e)
@@ -63,9 +65,11 @@ namespace KP_Monitor
                 this.loginButton.Visibility = Visibility.Collapsed;
                 ApplicationBar.IsVisible = true;
                 this.profilePicture.Visibility = Visibility.Visible;
+                
             }
             else 
             {
+                this.profilePicture.Visibility = Visibility.Collapsed;
                 this.home.Visibility = Visibility.Collapsed;
                 this.post.Visibility = Visibility.Collapsed;
                 this.rule.Visibility = Visibility.Collapsed;
@@ -80,6 +84,54 @@ namespace KP_Monitor
                 this.profilePicture.Visibility = Visibility.Collapsed;
             }
         }
+
+        private string BuildUserInfoDisplay(Facebook.Client.GraphUser user)
+        {
+            var userInfo = new System.IO.StringWriter();
+
+            // Example: typed access (name)
+            // - no special permissions required
+            userInfo.WriteLine(string.Format("Name: {0}", user.Name));
+            userInfo.WriteLine();
+
+            // Example: typed access (birthday)
+            // - requires user_birthday permission
+            userInfo.WriteLine(string.Format("Birthday: {0}", user.Birthday));
+            userInfo.WriteLine();
+
+            // Example: partially typed access, to location field,
+            // name key (location)
+            // - requires user_location permission
+            userInfo.WriteLine(string.Format("City: {0}", user.Location.City));
+            userInfo.WriteLine();
+
+            // Example: access via property name (locale)
+            // - no special permissions required
+            userInfo.WriteLine(string.Format("Locale: {0}", user["locale"] ?? string.Empty));
+            userInfo.WriteLine();
+
+            // Example: access via key for array (languages) 
+            // - requires user_likes permission
+           
+
+            return userInfo.ToString();
+        }
+
+        private async System.Threading.Tasks.Task RetriveUserInfo()
+        {
+            var client = new Facebook.FacebookClient(this.loginButton.CurrentSession.AccessToken);
+
+            dynamic result = await client.GetTaskAsync("me");
+            var currentUser = new Facebook.Client.GraphUser(result);
+
+            this.userInfo.Text = this.BuildUserInfoDisplay(currentUser);
+        }
+
+        private void OnUserInfoChanged(object sender, Facebook.Client.Controls.UserInfoChangedEventArgs e)
+        {
+            this.userInfo.Text = this.BuildUserInfoDisplay(e.User);
+        }
        
     }
+
 }

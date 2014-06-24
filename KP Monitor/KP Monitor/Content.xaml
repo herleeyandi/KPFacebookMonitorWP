@@ -26,7 +26,11 @@
 
             <!--Panorama item one-->
             <phone:PanoramaItem x:Name="home" Header="home">
-                <TextBlock HorizontalAlignment="Left" Margin="233,6,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Name, ElementName=loginButton}" VerticalAlignment="Top" Height="189" Width="176" FontSize="30"/>
+                <Grid>
+                    <facebookControls:ProfilePicture x:Name="profilePicture" CropMode="Square" ProfileId="{Binding CurrentSession.FacebookId, ElementName=loginButton}" Margin="10,10,210,444" Height="200" Width="200" BorderBrush="Black" CacheMode="BitmapCache" />
+                    <TextBlock x:Name="namauser" HorizontalAlignment="Left" Margin="233,6,0,0" TextWrapping="Wrap" Text="{Binding CurrentUser.Name, ElementName=loginButton}" VerticalAlignment="Top" Height="189" Width="176" FontSize="30"/>
+                    <TextBlock x:Name="userInfo"  Margin="23,244,0,0"></TextBlock>
+                </Grid>
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
@@ -44,8 +48,8 @@
                 <Grid/>
             </phone:PanoramaItem>
         </phone:Panorama>
-        <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Background="{x:Null}" />
-        <facebookControls:ProfilePicture x:Name="profilePicture" CropMode="Fill" ProfileId="{Binding CurrentSession.FacebookId, ElementName=loginButton}" Margin="24,131,256,469" Height="200" Width="200" />
+        <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Permissions="user_location, user_birthday, user_likes" UserInfoChanged="OnUserInfoChanged" Background="{x:Null}" />
+        
     </Grid>
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
