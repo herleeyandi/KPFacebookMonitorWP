@@ -131,6 +131,48 @@ namespace KP_Monitor
         {
             this.userInfo.Text = this.BuildUserInfoDisplay(e.User);
         }
+
+        private async void PublishStory()
+        {
+            isi.DefaultItem = post;
+            await this.loginButton.RequestNewPermissions("publish_stream");
+
+            var facebookClient = new Facebook.FacebookClient(this.loginButton.CurrentSession.AccessToken);
+
+            var postParams = new
+            {
+                /*
+                name = "Facebook SDK for .NET",
+                caption = "Build great social apps and get more installs.",
+                description = "The Facebook SDK for .NET makes it easier and faster to develop Facebook integrated .NET apps.",
+                link = "http://facebooksdk.net/",
+                picture = "http://facebooksdk.net/assets/img/logo75x75.png"
+                */
+             
+
+                message = postKata.Text
+            };
+            
+            try
+            {
+                isi.DefaultItem = post;
+                dynamic fbPostTaskResult = await facebookClient.PostTaskAsync("/me/feed", postParams);
+                var result = (IDictionary<string, object>)fbPostTaskResult;
+                isi.DefaultItem = post;
+                MessageBox.Show("Post berhasil dilakukan");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Post gagal dilakukan");
+               
+            }
+        }
+
+        private void postfeed_Click(object sender, RoutedEventArgs e)
+        {
+            this.PublishStory();
+        }
        
     }
 
