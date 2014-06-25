@@ -127,14 +127,35 @@ namespace KP_Monitor
             this.userInfo.Text = this.BuildUserInfoDisplay(currentUser);
         }
 
+        private void IsWait()
+        {
+            this.wait.Visibility = Visibility.Visible;
+            this.waitteks.Visibility = Visibility.Visible;
+            this.performanceProgressBar.IsIndeterminate = true;
+            this.performanceProgressBar.Visibility = Visibility.Visible;
+            ApplicationBar.IsVisible = false;
+        }
+
+        private void NotWait()
+        {
+            this.wait.Visibility = Visibility.Collapsed;
+            this.waitteks.Visibility = Visibility.Collapsed;
+            this.performanceProgressBar.IsIndeterminate = false;
+            this.performanceProgressBar.Visibility = Visibility.Collapsed;
+            ApplicationBar.IsVisible = true;
+        }
+
         private void OnUserInfoChanged(object sender, Facebook.Client.Controls.UserInfoChangedEventArgs e)
         {
+            IsWait();
             this.userInfo.Text = this.BuildUserInfoDisplay(e.User);
+            NotWait();
         }
 
         private async void PublishStory()
         {
             isi.DefaultItem = post;
+            IsWait();
             await this.loginButton.RequestNewPermissions("publish_stream");
 
             var facebookClient = new Facebook.FacebookClient(this.loginButton.CurrentSession.AccessToken);
@@ -156,14 +177,17 @@ namespace KP_Monitor
             try
             {
                 isi.DefaultItem = post;
+                IsWait();
                 dynamic fbPostTaskResult = await facebookClient.PostTaskAsync("/me/feed", postParams);
                 var result = (IDictionary<string, object>)fbPostTaskResult;
                 isi.DefaultItem = post;
+                NotWait();
                 MessageBox.Show("Post berhasil dilakukan");
 
             }
             catch (Exception ex)
             {
+                NotWait();
                 MessageBox.Show("Post gagal dilakukan");
                
             }
@@ -172,6 +196,11 @@ namespace KP_Monitor
         private void postfeed_Click(object sender, RoutedEventArgs e)
         {
             this.PublishStory();
+        }
+
+        private void loginButton_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
+        {
+            IsWait();
         }
        
     }

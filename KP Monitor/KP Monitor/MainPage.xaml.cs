@@ -17,6 +17,8 @@ namespace KP_Monitor
         public MainPage()
         {
             InitializeComponent();
+            this.progressopening.IsIndeterminate = true;
+            this.progressopening.Visibility = Visibility.Visible;
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();

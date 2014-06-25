@@ -14,6 +14,8 @@ MDIL image C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor
 File C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\KP Monitor.dll output C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\obj\Debug\MDIL\KP Monitor.dll
 Processing file: C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Phone.Controls.dll
 File C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Phone.Controls.dll is not in the compile filter. Skipping.
+Processing file: C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Phone.Controls.Toolkit.dll
+File C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Phone.Controls.Toolkit.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Threading.Tasks.Extensions.dll
 File C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Threading.Tasks.Extensions.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Herleeyandi\documents\visual studio 2013\Projects\KP Monitor\KP Monitor\Bin\Debug\MDIL\Microsoft.Threading.Tasks.Extensions.Phone.dll

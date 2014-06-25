@@ -36,7 +36,7 @@
             <!--Panorama item two-->
             <phone:PanoramaItem x:Name="post" Header="post">
                 <Grid>
-                    <Button x:Name="postfeed" Content="POST" HorizontalAlignment="Left" Height="95" Margin="139,213,0,0" VerticalAlignment="Top" Width="237" Foreground="#FFFFFBFB" Click="postfeed_Click" BorderBrush="White" Background="#FF114EF0"/>
+                    <Button x:Name="postfeed" Content="POST" HorizontalAlignment="Left" Height="95" Margin="177,208,0,0" VerticalAlignment="Top" Width="237" Foreground="#FFFFFBFB" Click="postfeed_Click" BorderBrush="White" Background="#FF114EF0"/>
                     <TextBox x:Name="postKata" HorizontalAlignment="Left" Height="165" Margin="10,43,0,0" TextWrapping="Wrap" Text="Say something...." VerticalAlignment="Top" Width="400" BorderBrush="#BF040404" />
                 </Grid>
             </phone:PanoramaItem>
@@ -51,8 +51,10 @@
                 <Grid/>
             </phone:PanoramaItem>
         </phone:Panorama>
-        <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Permissions="user_location, user_birthday, user_likes, publish_actions" UserInfoChanged="OnUserInfoChanged" Background="{x:Null}" />
-
+        <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Permissions="user_location, user_birthday, user_likes, publish_actions" UserInfoChanged="OnUserInfoChanged" Background="{x:Null}" ManipulationStarted="loginButton_ManipulationStarted" />
+        <Canvas x:Name="wait" Background="#FF3049EC" Visibility="Collapsed"></Canvas>
+        <TextBlock x:Name="waitteks" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Please Wait" Visibility="Collapsed"></TextBlock>
+        <ProgressBar x:Name="performanceProgressBar" HorizontalAlignment="Left" Height="42" Margin="31,439,0,319" VerticalAlignment="Center" Width="425" Background="#19060606" Foreground="#FFF9F2F1" Visibility="Collapsed"/>
     </Grid>
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>

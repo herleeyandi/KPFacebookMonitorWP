@@ -42,21 +42,17 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="KP MONITOR" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="login first" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Button x:Name="tombolLogin" Content="LOGIN" HorizontalAlignment="Left" Margin="73,310,0,0" VerticalAlignment="Top" Width="320" Height="87" FontSize="24" Click="tombolLogin_Click"/>
+            <Button x:Name="tombolLogin" Content="START HERE" HorizontalAlignment="Left" Margin="73,466,0,0" VerticalAlignment="Top" Width="320" Height="87" FontSize="24" Click="tombolLogin_Click"/>
+            <Image x:Name="logo" HorizontalAlignment="Left" Height="219" Margin="100,130,0,0" VerticalAlignment="Top" Width="278" Source="/Images/logo app kp.png"/>
+            <ProgressBar x:Name="progressopening" HorizontalAlignment="Left" Height="38" Margin="10,382,0,0" VerticalAlignment="Top" Width="422"/>
 
         </Grid>
         <!-- login control -->
-        <facebookControls:LoginButton 
-            x:Name="loginButton" 
-            Grid.Row="1" 
-            Margin="0,211,52,334"
-            HorizontalAlignment="Right" SessionStateChanged="OnSessionStateChanged" ApplicationId="1409855199235025" Height="94" Width="367" />
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
