@@ -43,7 +43,11 @@
 
             <!--Panorama item three-->
             <phone:PanoramaItem x:Name="rule" Header="rule">
-                <Grid/>
+                <Grid>
+                    <TextBlock x:Name="hasilquery" Text="halo" Margin="36,32,66,232" TextWrapping="Wrap"></TextBlock>
+                    <Button x:Name="query" Content="Get friend" HorizontalAlignment="Left" Height="88" Margin="105,452,0,0" VerticalAlignment="Top" Width="305" Foreground="#FF080707" Click="query_Click" BorderBrush="#FF0E0D0D"/>              
+                </Grid>
+               
             </phone:PanoramaItem>
 
             <!--Panorama item tfour-->
@@ -51,7 +55,7 @@
                 <Grid/>
             </phone:PanoramaItem>
         </phone:Panorama>
-        <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Permissions="user_location, user_birthday, user_likes, publish_actions" UserInfoChanged="OnUserInfoChanged" Background="{x:Null}" ManipulationStarted="loginButton_ManipulationStarted" />
+        <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Permissions="user_location, user_birthday, user_likes, publish_actions, user_friends, email, read_stream, friends_likes, user_status" UserInfoChanged="OnUserInfoChanged" Background="{x:Null}" ManipulationStarted="loginButton_ManipulationStarted" />
         <Canvas x:Name="wait" Background="#FF3049EC" Visibility="Collapsed"></Canvas>
         <TextBlock x:Name="waitteks" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Please Wait" Visibility="Collapsed"></TextBlock>
         <ProgressBar x:Name="performanceProgressBar" HorizontalAlignment="Left" Height="42" Margin="31,439,0,319" VerticalAlignment="Center" Width="425" Background="#19060606" Foreground="#FFF9F2F1" Visibility="Collapsed"/>

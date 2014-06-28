@@ -202,6 +202,28 @@ namespace KP_Monitor
         {
             IsWait();
         }
+
+        private async void query_Click(object sender, RoutedEventArgs e)
+        {
+            var fb = new Facebook.FacebookClient(this.loginButton.CurrentSession.AccessToken);
+            var result = await fb.GetTaskAsync("fql",
+                new
+                {
+                    q = "select name from user where uid IN(SELECT likes.friends FROM stream WHERE source_id = me())"
+                });
+
+            System.Diagnostics.Debug.WriteLine("Result: " + result.ToString());
+            String a, b, c, d, f;
+            a = result.ToString();
+            b = a.Replace('"','a');
+            c = b.Replace("{adataa:[{anamea:a", "");
+            d = c.Replace("{anamea:a", "|");
+            f = d.Replace("a},", "");
+            a = "";
+            a = f.Replace("a}]}", "");
+           
+            this.hasilquery.Text = a;
+        }
        
     }
 
