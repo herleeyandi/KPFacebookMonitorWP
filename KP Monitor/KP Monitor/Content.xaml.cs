@@ -63,7 +63,7 @@ namespace KP_Monitor
                 this.LayoutRoot.Background = new SolidColorBrush(Colors.White);
                 isi.Foreground = new SolidColorBrush(Colors.Black);
                 this.loginButton.Visibility = Visibility.Collapsed;
-                ApplicationBar.IsVisible = true;
+                //ApplicationBar.IsVisible = true;
                 this.profilePicture.Visibility = Visibility.Visible;
                 
             }
