@@ -217,7 +217,7 @@ namespace KP_Monitor
                     q = new
                     {
                         friends = "SELECT likes.friends FROM stream WHERE source_id=me()",
-                        friendinfo = "select name from user where uid IN(SELECT likes.friends FROM #friends)"
+                        friendinfo = "select name, uid from user where uid IN(SELECT likes.friends FROM #friends)"
                     }
                 });
 
@@ -250,13 +250,33 @@ namespace KP_Monitor
             temp.Replace(",friendinfo,", "+");
             temp.Replace("fql_result_set", "");
             temp.Replace("data", "");
-
-            this.hasilquery.Text = temp.ToString();
-
-            System.Diagnostics.Debug.WriteLine(temp.ToString());
+            temp.Replace(",uid", "-");
+            
+            String[] data = temp.ToString().Split('+');
            
+            String[] idpengguna = data[1].Split(',');
+            String[] likepengguna = data[0].Split(',');
 
-           
+            int count;
+
+            String hasilAkhir="";
+
+            foreach(String pengguna in idpengguna)
+            {
+                count = 0;
+                String[] cek = pengguna.Split('-');
+                foreach(String like in likepengguna)
+                {
+                    if(cek[1]==like)
+                    {
+                        count++;
+                    }
+                }
+                hasilAkhir = hasilAkhir + cek[0] + " : " + count.ToString() + " likes\n";
+            }
+
+            this.hasilquery.Text = hasilAkhir;
+            //System.Diagnostics.Debug.WriteLine(data[0]);          
         }
 
     }
