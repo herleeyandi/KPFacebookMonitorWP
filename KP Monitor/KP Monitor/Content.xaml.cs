@@ -8,11 +8,15 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KP_Monitor
 {
     public partial class Content : PhoneApplicationPage
     {
+        String datalike;
+        String datauser;
         public Content()
         {
             InitializeComponent();
@@ -205,26 +209,56 @@ namespace KP_Monitor
 
         private async void query_Click(object sender, RoutedEventArgs e)
         {
+
             var fb = new Facebook.FacebookClient(this.loginButton.CurrentSession.AccessToken);
             var result = await fb.GetTaskAsync("fql",
                 new
                 {
-                    q = "select name from user where uid IN(SELECT likes.friends FROM stream WHERE source_id = me())"
+                    q = new
+                    {
+                        friends = "SELECT likes.friends FROM stream WHERE source_id=me()",
+                        friendinfo = "select name from user where uid IN(SELECT likes.friends FROM #friends)"
+                    }
                 });
 
-            System.Diagnostics.Debug.WriteLine("Result: " + result.ToString());
-            String a, b, c, d, f;
-            a = result.ToString();
-            b = a.Replace('"','a');
-            c = b.Replace("{adataa:[{anamea:a", "");
-            d = c.Replace("{anamea:a", "|");
-            f = d.Replace("a},", "");
-            a = "";
-            a = f.Replace("a}]}", "");
+            
+            
+            StringBuilder temp = new StringBuilder(result.ToString());
+            temp.Replace('"', '|');
+            /*
+            temp.Replace("{adataa:[{anamea:afriendsa,afql_result_seta:[", "");
+            temp.Replace("{alikes:a{afriendsa:[a", "+");
+            temp.Replace("{alikes:a{afriendsa:[", "+");
+            temp.Replace("{anamea:afriendinfoa,afql_result_seta:[", "|");
+            temp.Replace("{anamea:a", "+");
+            temp.Replace("a,a", "+");
+            temp.Replace("a},", "");
+            temp.Replace("a]}},", "");
+            temp.Replace("a}]}", "");*/
+            //temp.Replace("|,|", "-");
+            temp.Replace("|", "");
+            //temp.Replace(",", "");
+            temp.Replace("{", "");
+            temp.Replace("}", "");
+            temp.Replace("[", "");
+            temp.Replace("]", "");
+            temp.Replace(":", "");
+            temp.Replace("likes", "");
+            temp.Replace("name", "");
+            temp.Replace("friends,", "");
+            temp.Replace("friends", "");
+            temp.Replace(",friendinfo,", "+");
+            temp.Replace("fql_result_set", "");
+            temp.Replace("data", "");
+
+            this.hasilquery.Text = temp.ToString();
+
+            System.Diagnostics.Debug.WriteLine(temp.ToString());
            
-            this.hasilquery.Text = a;
+
+           
         }
-       
+
     }
 
 }

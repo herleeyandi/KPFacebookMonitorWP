@@ -44,10 +44,10 @@
             <!--Panorama item three-->
             <phone:PanoramaItem x:Name="rule" Header="rule">
                 <Grid>
-                    <TextBlock x:Name="hasilquery" Text="halo" Margin="36,32,66,232" TextWrapping="Wrap"></TextBlock>
-                    <Button x:Name="query" Content="Get friend" HorizontalAlignment="Left" Height="88" Margin="105,452,0,0" VerticalAlignment="Top" Width="305" Foreground="#FF080707" Click="query_Click" BorderBrush="#FF0E0D0D"/>              
+                    <TextBlock x:Name="hasilquery" Text="halo" Margin="36,32,66,170" TextWrapping="Wrap"></TextBlock>
+                    <Button x:Name="query" Content="Get Like Data" HorizontalAlignment="Left" Height="87" Margin="10,519,0,0" VerticalAlignment="Top" Width="205" Foreground="#FF080707" Click="query_Click" BorderBrush="Black"/>
                 </Grid>
-               
+
             </phone:PanoramaItem>
 
             <!--Panorama item tfour-->
