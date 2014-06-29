@@ -42,17 +42,22 @@
             </phone:PanoramaItem>
 
             <!--Panorama item three-->
-            <phone:PanoramaItem x:Name="rule" Header="rule">
+            <phone:PanoramaItem x:Name="rule" Header="like data">
                 <Grid>
-                    <TextBlock x:Name="hasilquery" Text="halo" Margin="36,32,66,170" TextWrapping="Wrap"></TextBlock>
-                    <Button x:Name="query" Content="Get Like Data" HorizontalAlignment="Left" Height="87" Margin="10,519,0,0" VerticalAlignment="Top" Width="205" Foreground="#FF080707" Click="query_Click" BorderBrush="Black"/>
+                    <TextBlock x:Name="hasilquery" Text="Data not found" Margin="20,168,10,68" TextWrapping="Wrap"></TextBlock>
+                    <Button x:Name="query" Content="Get Like Data" HorizontalAlignment="Left" Height="85" Margin="196,99,0,0" VerticalAlignment="Top" Width="214" Foreground="White" Click="query_Click" BorderBrush="{x:Null}" Background="#FF3E46F7"/>
+                    <TextBox x:Name="namapage" HorizontalAlignment="Left" Height="84" Margin="10,10,0,0" TextWrapping="Wrap" Text="Page name" VerticalAlignment="Top" Width="400" BorderBrush="#BF000000"/>
                 </Grid>
 
             </phone:PanoramaItem>
 
             <!--Panorama item tfour-->
             <phone:PanoramaItem x:Name="reward" Header="reward">
-                <Grid/>
+                <Grid>
+                    <TextBlock x:Name="hadiahmakan" HorizontalAlignment="Left" Height="246" Margin="24,24,0,0" TextWrapping="Wrap" Text="Hadiah Makan Gratis :" VerticalAlignment="Top" Width="363"/>
+                    <TextBlock x:Name="hadiahminum" HorizontalAlignment="Left" Height="250" Margin="24,314,0,0" TextWrapping="Wrap" Text="Hadiah Minum Gratis :" VerticalAlignment="Top" Width="363"/>
+
+                </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
         <facebookControls:LoginButton x:Name="loginButton" Height="85" Margin="81,592,0,123" Width="324" Foreground="#FFF9F1F1" ApplicationId="1409855199235025" SessionStateChanged="OnSessionStateChanged" Permissions="user_location, user_birthday, user_likes, publish_actions, user_friends, email, read_stream, friends_likes, user_status" UserInfoChanged="OnUserInfoChanged" Background="{x:Null}" ManipulationStarted="loginButton_ManipulationStarted" />

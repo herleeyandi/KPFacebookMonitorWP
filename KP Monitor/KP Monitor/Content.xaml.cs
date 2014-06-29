@@ -15,8 +15,8 @@ namespace KP_Monitor
 {
     public partial class Content : PhoneApplicationPage
     {
-        String datalike;
-        String datauser;
+        String rewardmakan = "Hadiah Makan Gratis :\n";
+        String rewardminum = "Hadiah Minum Gratis :\n";
         public Content()
         {
             InitializeComponent();
@@ -216,7 +216,7 @@ namespace KP_Monitor
                 {
                     q = new
                     {
-                        friends = "SELECT likes.friends FROM stream WHERE source_id=me()",
+                        friends = "SELECT likes.friends FROM stream WHERE source_id In(select page_id from page where name='"+namapage.Text+"')",
                         friendinfo = "select name, uid from user where uid IN(SELECT likes.friends FROM #friends)"
                     }
                 });
@@ -272,10 +272,20 @@ namespace KP_Monitor
                         count++;
                     }
                 }
+                if(count>5)
+                {
+                    rewardmakan = rewardmakan + "-)" + cek[0] + "\n";
+                }
+                else if(count>2 && count<5)
+                {
+                    rewardminum = rewardminum + "-)" + cek[0] + "\n";
+                }
                 hasilAkhir = hasilAkhir + cek[0] + " : " + count.ToString() + " likes\n";
             }
 
-            this.hasilquery.Text = hasilAkhir;
+            this.hasilquery.Text = "LIKE DATA :\n"+hasilAkhir;
+            hadiahmakan.Text = rewardmakan;
+            hadiahminum.Text = rewardminum;
             //System.Diagnostics.Debug.WriteLine(data[0]);          
         }
 
