@@ -42,11 +42,11 @@
             </phone:PanoramaItem>
 
             <!--Panorama item three-->
-            <phone:PanoramaItem x:Name="rule" Header="like data">
+            <phone:PanoramaItem x:Name="likedata" Header="like data">
                 <Grid>
                     <TextBlock x:Name="hasilquery" Text="Data not found" Margin="20,168,10,68" TextWrapping="Wrap"></TextBlock>
                     <Button x:Name="query" Content="Get Like Data" HorizontalAlignment="Left" Height="85" Margin="196,99,0,0" VerticalAlignment="Top" Width="214" Foreground="White" Click="query_Click" BorderBrush="{x:Null}" Background="#FF3E46F7"/>
-                    <TextBox x:Name="namapage" HorizontalAlignment="Left" Height="84" Margin="10,10,0,0" TextWrapping="Wrap" Text="Page name" VerticalAlignment="Top" Width="400" BorderBrush="#BF000000"/>
+                    <TextBox x:Name="namapage" HorizontalAlignment="Left" Height="84" Margin="10,10,0,0" TextWrapping="Wrap" Text="KP Monitor" VerticalAlignment="Top" Width="400" BorderBrush="#BF000000"/>
                 </Grid>
 
             </phone:PanoramaItem>
@@ -57,6 +57,14 @@
                     <TextBlock x:Name="hadiahmakan" HorizontalAlignment="Left" Height="246" Margin="24,24,0,0" TextWrapping="Wrap" Text="Hadiah Makan Gratis :" VerticalAlignment="Top" Width="363"/>
                     <TextBlock x:Name="hadiahminum" HorizontalAlignment="Left" Height="250" Margin="24,314,0,0" TextWrapping="Wrap" Text="Hadiah Minum Gratis :" VerticalAlignment="Top" Width="363"/>
 
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem x:Name="postdetail" Header="post detail">
+                <Grid>
+                    <ScrollViewer HorizontalAlignment="Left" Margin="12,48,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="404" Height="523">
+                        <TextBlock x:Name="detailpostfb" HorizontalAlignment="Left" TextWrapping="Wrap" Text="No data viewed" VerticalAlignment="Top" Width="363"/>
+                    </ScrollViewer>
+                    <TextBlock x:Name="headerpostdetail" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" TextWrapping="Wrap" Text="DATA POST : " VerticalAlignment="Top" Width="344" FontSize="25" FontWeight="SemiBold"/>
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>

@@ -22,7 +22,8 @@ namespace KP_Monitor
             InitializeComponent();
             this.home.Visibility = Visibility.Collapsed;
             this.post.Visibility = Visibility.Collapsed;
-            this.rule.Visibility = Visibility.Collapsed;
+            this.likedata.Visibility = Visibility.Collapsed;
+            this.postdetail.Visibility = Visibility.Collapsed;
             this.reward.Visibility = Visibility.Collapsed;
             this.profilePicture.Visibility = Visibility.Collapsed;
             this.LayoutRoot.Background = new SolidColorBrush(Colors.Blue);
@@ -42,7 +43,8 @@ namespace KP_Monitor
             login.Header = "logout";
             this.home.Visibility = Visibility.Collapsed;
             this.post.Visibility = Visibility.Collapsed;
-            this.rule.Visibility = Visibility.Collapsed;
+            this.likedata.Visibility = Visibility.Collapsed;
+            this.postdetail.Visibility = Visibility.Collapsed;
             this.reward.Visibility = Visibility.Collapsed;
             this.LayoutRoot.Background = new SolidColorBrush(Colors.Blue);
             isi.Foreground = new SolidColorBrush(Colors.White);
@@ -62,7 +64,8 @@ namespace KP_Monitor
                 isi.DefaultItem = home;
                 this.login.Visibility = Visibility.Collapsed;
                 this.post.Visibility = Visibility.Visible;
-                this.rule.Visibility = Visibility.Visible;
+                this.likedata.Visibility = Visibility.Visible;
+                this.postdetail.Visibility = Visibility.Visible;
                 this.reward.Visibility = Visibility.Visible;
                 this.LayoutRoot.Background = new SolidColorBrush(Colors.White);
                 isi.Foreground = new SolidColorBrush(Colors.Black);
@@ -76,7 +79,8 @@ namespace KP_Monitor
                 this.profilePicture.Visibility = Visibility.Collapsed;
                 this.home.Visibility = Visibility.Collapsed;
                 this.post.Visibility = Visibility.Collapsed;
-                this.rule.Visibility = Visibility.Collapsed;
+                this.likedata.Visibility = Visibility.Collapsed;
+                this.postdetail.Visibility = Visibility.Collapsed;
                 this.reward.Visibility = Visibility.Collapsed;
                 this.LayoutRoot.Background = new SolidColorBrush(Colors.Blue);
                 this.login.Visibility = Visibility.Visible;
@@ -207,6 +211,15 @@ namespace KP_Monitor
             IsWait();
         }
 
+        private String GetPostDetail (String source, String from, String end)
+        {
+            String result = "";
+            int pFrom = source.IndexOf(from) + from.Length;
+            int pTo = source.LastIndexOf(end);
+
+            return result = source.Substring(pFrom, pTo - pFrom);
+        }
+
         private async void query_Click(object sender, RoutedEventArgs e)
         {
 
@@ -216,34 +229,22 @@ namespace KP_Monitor
                 {
                     q = new
                     {
-                        friends = "SELECT likes.friends FROM stream WHERE source_id In(select page_id from page where name='"+namapage.Text+"')",
+                        friends = "SELECT message, created_time, likes.friends, post_id, permalink FROM stream WHERE source_id In(select page_id from page where name='" + namapage.Text + "')",
                         friendinfo = "select name, uid from user where uid IN(SELECT likes.friends FROM #friends)"
                     }
                 });
 
-            
+
             
             StringBuilder temp = new StringBuilder(result.ToString());
             temp.Replace('"', '|');
-            /*
-            temp.Replace("{adataa:[{anamea:afriendsa,afql_result_seta:[", "");
-            temp.Replace("{alikes:a{afriendsa:[a", "+");
-            temp.Replace("{alikes:a{afriendsa:[", "+");
-            temp.Replace("{anamea:afriendinfoa,afql_result_seta:[", "|");
-            temp.Replace("{anamea:a", "+");
-            temp.Replace("a,a", "+");
-            temp.Replace("a},", "");
-            temp.Replace("a]}},", "");
-            temp.Replace("a}]}", "");*/
-            //temp.Replace("|,|", "-");
             temp.Replace("|", "");
-            //temp.Replace(",", "");
             temp.Replace("{", "");
             temp.Replace("}", "");
             temp.Replace("[", "");
             temp.Replace("]", "");
             temp.Replace(":", "");
-            temp.Replace("likes", "");
+            //temp.Replace("likes", "");
             temp.Replace("name", "");
             temp.Replace("friends,", "");
             temp.Replace("friends", "");
@@ -251,12 +252,41 @@ namespace KP_Monitor
             temp.Replace("fql_result_set", "");
             temp.Replace("data", "");
             temp.Replace(",uid", "-");
+            temp.Replace("message", "#$Isi Post : ");
+            temp.Replace("https", "https:");
+
             
             String[] data = temp.ToString().Split('+');
-           
             String[] idpengguna = data[1].Split(',');
-            String[] likepengguna = data[0].Split(',');
+            StringBuilder temp2 = new StringBuilder(data[0]);
+            temp2.Replace(",created_time", "$Waktu Pembuatan : ");
+            temp2.Replace(",likes", "$like");
+            temp2.Replace(",post_id", "$Post ID : ");
+            temp2.Replace(",permalink", "$permalink");
+            String finalDetailPost = "";
+            String[] replicas = temp2.ToString().Split('#');
+            String likepenggunamentah = "";
+            String datausersementara = "";
+            foreach(String replica in replicas)
+            {
+                String[] pecahreplica = replica.Split('$');
+                foreach(String i in pecahreplica)
+                {
+                    if(i.Contains("like"))
+                    {
+                        datausersementara = datausersementara + i;
+                    }
+                }
+                
+            }
+            String likepost = datausersementara.Replace("like", "#");
+            String[] likeposts = likepost.Split('#');
+            likepenggunamentah = datausersementara.Replace("like", ",");
+            //System.Diagnostics.Debug.WriteLine(datausersementara);
+            
+            String[] likepengguna = likepenggunamentah.Split(',');
 
+            
             int count;
 
             String hasilAkhir="";
@@ -286,7 +316,50 @@ namespace KP_Monitor
             this.hasilquery.Text = "LIKE DATA :\n"+hasilAkhir;
             hadiahmakan.Text = rewardmakan;
             hadiahminum.Text = rewardminum;
-            //System.Diagnostics.Debug.WriteLine(data[0]);          
+            String tempdatauser = "";
+            int hitung;
+            
+            //finalizing
+            int indeks;
+            indeks = 0;
+            String[] userperpost = tempdatauser.Split('@');
+            String finaldatauserpost = "";
+            foreach(String beriindeks in userperpost)
+            {
+                finaldatauserpost= finaldatauserpost + beriindeks + "#" + indeks.ToString() + "@";
+                indeks++;
+            }
+            foreach (String replica in replicas)
+            {
+                String[] pecahreplica = replica.Split('$');
+                String[] veryfinaluser = finaldatauserpost.Split('@');
+
+                if (!replica.Contains("permalink,"))
+                {
+                    foreach (String i in pecahreplica)
+                    {
+                        if (!i.Contains("like") && !i.Contains("permalink"))
+                        {
+                            finalDetailPost = finalDetailPost + i + "\n";
+                        }
+                        else if (i.Contains("like"))
+                        {
+                            finalDetailPost = finalDetailPost + "Post ini di-Like oleh : \n";
+                            foreach (String nama in idpengguna)
+                            {
+                                String[] cek3 = nama.Split('-');
+                                if (i.Contains(cek3[1]))
+                                {
+                                    finalDetailPost = finalDetailPost + "-)" + cek3[0] + "\n";
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            this.detailpostfb.Text = finalDetailPost;
+            System.Diagnostics.Debug.WriteLine(finalDetailPost);
         }
 
     }
