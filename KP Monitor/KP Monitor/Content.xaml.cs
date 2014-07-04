@@ -259,7 +259,7 @@ namespace KP_Monitor
             String[] data = temp.ToString().Split('+');
             String[] idpengguna = data[1].Split(',');
             StringBuilder temp2 = new StringBuilder(data[0]);
-            temp2.Replace(",created_time", "$Waktu Pembuatan : ");
+            temp2.Replace(",created_time", "$created_time");
             temp2.Replace(",likes", "$like");
             temp2.Replace(",post_id", "$Post ID : ");
             temp2.Replace(",permalink", "$permalink");
@@ -302,7 +302,7 @@ namespace KP_Monitor
                         count++;
                     }
                 }
-                if(count>5)
+                if(count>=5)
                 {
                     rewardmakan = rewardmakan + "-)" + cek[0] + "\n";
                 }
@@ -338,9 +338,22 @@ namespace KP_Monitor
                 {
                     foreach (String i in pecahreplica)
                     {
-                        if (!i.Contains("like") && !i.Contains("permalink"))
+                        if (!i.Contains("like") && !i.Contains("permalink") && !i.Contains("created_time"))
                         {
                             finalDetailPost = finalDetailPost + i + "\n";
+                        }
+                        else if (i.Contains("created_time"))
+                        {
+                            String waktu = "";
+                            waktu = i.Replace("created_time", "");
+                            int timedifb;
+                            timedifb = Convert.ToInt32(waktu);
+                            DateTime unixYear0 = new DateTime(1970, 1, 1);
+                            long unixTimeStampInTicks = timedifb * TimeSpan.TicksPerSecond;
+                            DateTime dtUnix = new DateTime(unixYear0.Ticks + unixTimeStampInTicks);
+                            waktu = dtUnix.ToString("dd-MM-yyyy");
+                            finalDetailPost = finalDetailPost + "Waktu Pembuatan : " + waktu + "\n";
+
                         }
                         else if (i.Contains("like"))
                         {

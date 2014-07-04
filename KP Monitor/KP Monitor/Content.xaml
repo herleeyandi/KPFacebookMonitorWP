@@ -61,10 +61,10 @@
             </phone:PanoramaItem>
             <phone:PanoramaItem x:Name="postdetail" Header="post detail">
                 <Grid>
-                    <ScrollViewer HorizontalAlignment="Left" Margin="12,48,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="404" Height="523">
+                    <ScrollViewer HorizontalAlignment="Left" Margin="37,48,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="379" Height="523">
                         <TextBlock x:Name="detailpostfb" HorizontalAlignment="Left" TextWrapping="Wrap" Text="No data viewed" VerticalAlignment="Top" Width="363"/>
                     </ScrollViewer>
-                    <TextBlock x:Name="headerpostdetail" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" TextWrapping="Wrap" Text="DATA POST : " VerticalAlignment="Top" Width="344" FontSize="25" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="headerpostdetail" HorizontalAlignment="Left" Height="56" Margin="25,10,0,0" TextWrapping="Wrap" Text="DATA POST : " VerticalAlignment="Top" Width="329" FontSize="25" FontWeight="SemiBold"/>
                 </Grid>
             </phone:PanoramaItem>
         </phone:Panorama>
